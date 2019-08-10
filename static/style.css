@@ -6,3 +6,8 @@
     font-family: courier;
     font-size: 160%;
 }
+
+#navToggle{
+    height: 32px;
+    width: 32px;
+}
