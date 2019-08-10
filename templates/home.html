@@ -6,9 +6,21 @@
           <h2 class="jumbotron-heading">Customize Your Meal</h2>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
           <p>
-            <a href="#" id = "continue" class="btn btn-primary my-2">Find By City</a>
-            <a href="#" class="btn btn-secondary my-2">Find By Location</a>
+            <a href="#" id = "findByC" class="btn btn-primary my-2">Find By City</a>
+            <a href="#" id = "findByL" class="btn btn-secondary my-2">Find By Location</a>
           </p>
         </div>
+        <form id="citySearch" >
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Your City Name</label>
+                <input type="email" class="form-control" id="cityName" placeholder="E.g. Toronto">
+            </div>
+            <a href="#" id = "cityGoBtn" class="btn btn-primary my-2">Go</a>
+        </form>
 </section>
+<style >
+    #citySearch{
+        display:none;
+    }
+</style>
 {% endblock %}
