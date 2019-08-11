@@ -12,12 +12,18 @@
         </div>
         <form id="citySearch" >
             <div class="form-group">
-                <label for="exampleFormControlInput1">Your City Name</label>
-                <input type="email" class="form-control" id="cityName" placeholder="E.g. Toronto">
+                <label for="exampleFormControlInput1" class="float-left">Your City Name</label>
+                <input type="text" class="form-control" id="cityName" placeholder="E.g. Toronto">
+
+                <label for="exampleFormControlInput1" class="float-left">Price Limit</label>
+                <input type="number" class="form-control" id="priceUp" placeholder="E.g. 25">
             </div>
-            <a href="#" id = "cityGoBtn" class="btn btn-primary my-2">Go</a>
+            <a href="#" id = "cityGoBtn" class="btn btn-primary my-2 float-left">Go</a>
         </form>
+
 </section>
+<a href="#" id = "prevBtn" class="btn btn-primary my-2 float-left">Prev</a>
+<a href="#" id = "nextBtn" class="btn btn-primary my-2 float-right">Next</a>
 <main role="main">
 
 <div class="album py-5 bg-light">
@@ -26,12 +32,35 @@
       <div class="row" id= "screen">
 
       </div>
+
      </div>
+
 </div>
+
+<script>
+    var handleCuisine = function(NAME){
+        //console.log(NAME.id);
+        var rn = cuisineChoice.get(cuisineID.get(NAME.id));
+        cuisineChoice.set(cuisineID.get(NAME.id),!rn);
+        console.log(cuisineChoice);
+    }
+    var handleResType = function(NAME){
+        //console.log(NAME.id);
+        var rn = resTypeChoice.get(resTypeID.get(NAME.id));
+        resTypeChoice.set(resTypeID.get(NAME.id),!rn);
+        console.log(resTypeChoice);
+    }
+</script>
 
 <style >
     #citySearch{
         display:none;
+    }
+    #prevBtn{
+
+    }
+    #nextBtn{
+
     }
 </style>
 {% endblock %}
