@@ -22,8 +22,8 @@
         </form>
 
 </section>
-<a href="#" id = "prevBtn" class="btn btn-primary my-2 float-left">Prev</a>
-<a href="#" id = "nextBtn" class="btn btn-primary my-2 float-right">Next</a>
+<a href="#" id = "prevBtn" class="btn btn-primary my-2 float-left sticky">Prev</a>
+<a href="#" id = "nextBtn" class="btn btn-primary my-2 float-right sticky">Next</a>
 <main role="main">
 
 <div class="album py-5 bg-light">
@@ -57,10 +57,11 @@
         display:none;
     }
     #prevBtn{
-
+        position:fixed;
     }
     #nextBtn{
-
+        position:fixed;
+        right:0;
     }
 </style>
 {% endblock %}
