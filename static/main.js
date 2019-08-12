@@ -5,8 +5,33 @@ let resTypeChoice = new Map();
 let resTypeID = new Map();
 var state = 0;
 var firstInList = true;
+var list = [];
 
 $(document).ready(function() {
+    //storing restaurant info
+    class restaurant{
+        location = "";
+        features = [];
+        rating = "";
+        open = "";
+        name; id;
+        constructor(name,id){
+            this.name = name;
+            this.id = id;
+        }
+        setLocation(loc){
+            this.location = loc;
+        }
+        setOpenTimes(time){
+            this.open = time;
+        }
+        setFeatures(feat){
+            this.features = feat;
+        }
+        setRating(rate){
+            this.rating = rate;
+        }
+    }
 
     $("#findByC").click(function() {
         $("#citySearch").toggle();
@@ -138,6 +163,17 @@ $(document).ready(function() {
             return response.json();
         }).then(function(val){
             console.log(JSON.stringify(val));
+            var cuis = JSON.stringify(val);
+            var arr = JSON.parse(cuis);
+            for(i = 0; i < arr.restaurants.length; i++){
+                console.log(arr.restaurants[i].restaurant.name);
+                let res = new restaurant(arr.restaurants[i].restaurant.name, arr.restaurants[i].restaurant.id);
+                res.setLocation(arr.restaurants[i].restaurant.location.address);
+                res.setRating(arr.restaurants[i].restaurant.user_rating.aggregate_rating);
+                res.setOpenTimes(arr.restaurants[i].restaurant.timings);
+                list.push(res);
+            }
+            showRestaurant();
         })
     }
     function showCuisine(){
@@ -151,6 +187,13 @@ $(document).ready(function() {
         for (let [a, b] of resTypeID) {
             generateResTypeIcon(a);
         }
+    }
+    function showRestaurant(){
+        $("#screen").html("");
+        for (i = 0; i < list.length; i++) {
+            generateRestaurantIcon(list[i]);
+        }
+        console.log(list);
     }
     var generateCuisineIcon = function(NAME){
         var str = ""; var bool = cuisineChoice.get(cuisineID.get(NAME));
@@ -178,4 +221,16 @@ $(document).ready(function() {
         $("#screen").append(str);
     };
 
+    var generateRestaurantIcon = function(RES_NAME){
+        var str = ""; var bool = true;
+        str+='<div class="col-md-4"><div class="card mb-4 shadow-sm"><svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>';
+        str+='<div class="card-body"><p class="card-text">';
+        str+=RES_NAME.name;
+        str+='</p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" class="btn btn btn-outline-secondary">View</button></div><div class="form-check"><input class="form-check-input" type="checkbox" value="" onchange=\'handleResType(this);\' id = \''+RES_NAME.name+'\'';
+        if(bool)
+            str+='checked';
+        str+='></div>';
+        str+= '<small class="text-muted">Restaurant</div></div></div>';
+        $("#screen").append(str);
+    };
 });
