@@ -82,6 +82,10 @@ $(document).ready(function() {
             state--;
             showResType();
         }
+        if(state == 4){
+            state--;
+            showRestaurant();
+        }
     });
     function findCuisine(){
         url = 'https://developers.zomato.com/api/v2.1/cuisines?';
@@ -157,6 +161,7 @@ $(document).ready(function() {
                 url+=a.toString();
             }
         }
+        url+='&sort=rating&order=desc';
 
         fetch(url, {
             headers:{
