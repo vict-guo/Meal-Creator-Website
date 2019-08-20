@@ -4,9 +4,9 @@
 <section class="jumbotron text-center">
         <div class="container">
           <h2 class="jumbotron-heading">Customize Your Meal</h2>
-          <p class="lead text-muted">A quick and easy way to find something to eat. Adjust your caloric limit, location, and cuisine type to help you find something you like. App still in development.</p>
+          <p class="lead text-muted">A quick and easy way to find something to eat. Adjust your location and cuisine type to help you find something you like. App still in development.</p>
           <p>
-            <a href="#" id = "findByC" class="btn btn-primary my-2">Find By City</a>
+            <a href="#" id = "findByC" class="btn btn-secondary my-2">Find By City</a>
             <a href="#" id = "findByL" class="btn btn-secondary my-2">Find By Location</a>
           </p>
         </div>
@@ -15,10 +15,18 @@
                 <label for="exampleFormControlInput1" class="float-left">Your City Name</label>
                 <input type="text" class="form-control" id="cityName" placeholder="E.g. Toronto">
 
-                <label for="exampleFormControlInput1" class="float-left">Price Limit</label>
-                <input type="number" class="form-control" id="priceUp" placeholder="E.g. 25">
             </div>
             <a href="#" id = "cityGoBtn" class="btn btn-primary my-2 float-left">Go</a>
+        </form>
+        <form id="addressSearch" >
+            <div class="form-group">
+                <label for="exampleFormControlInput1" class="float-left">Address</label>
+                <input type="text" class="form-control" id="addressName" placeholder="E.g. Toronto">
+
+                <label for="exampleFormControlInput1" class="float-left">Max Distance(km)</label>
+                <input type="number" class="form-control" id="distanceKM" placeholder="E.g. 25">
+            </div>
+            <a href="#" id = "locationGoBtn" class="btn btn-primary my-2 float-left">Go</a>
         </form>
 
 </section>
@@ -64,6 +72,9 @@
 
 <style >
     #citySearch{
+        display:none;
+    }
+    #addressSearch{
         display:none;
     }
     #prevBtn{

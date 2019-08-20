@@ -39,6 +39,9 @@ $(document).ready(function() {
     $("#findByC").click(function() {
         $("#citySearch").toggle();
     });
+    $("#findByL").click(function() {
+        $("#addressSearch").toggle();
+    });
     $("#cityGoBtn").click(function() {
         url = 'https://developers.zomato.com/api/v2.1/cities?';
         url += "q=" + $('#cityName').val();
@@ -109,7 +112,7 @@ $(document).ready(function() {
             showCuisine();
             state = 1;
         })
-    }
+    };
     function findResType(){
         url = 'https://developers.zomato.com/api/v2.1/establishments?';
         url += 'city_id=';
@@ -230,7 +233,7 @@ $(document).ready(function() {
         str+='></div>';
         str+= '<small class="text-muted">Restaurant Type</div></div></div>';
         $("#screen").append(str);
-    };
+    }
 
     var generateRestaurantIcon = function(RES_NAME,idx){
         var str = ""; var bool = RES_NAME.picked;
@@ -243,5 +246,5 @@ $(document).ready(function() {
         str+='></div>';
         str+= '<small class="text-muted">Restaurant</div></div></div>';
         $("#screen").append(str);
-    };
+    }
 });
