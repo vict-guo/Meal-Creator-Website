@@ -10,12 +10,15 @@ var list = [];
 $(document).ready(function() {
     //storing restaurant info
     class restaurant{
-        location = "";
-        features = [];
-        rating = "";
-        open = "";
-        name; id; picked = false; thumbnail = "";
+        //location : "";
+    //    features = [];
+    //    rating = "";
+    //    open = "";
+        //name; id;
+
+        //thumbnail = "";
         constructor(name,id){
+            this.picked = false;
             this.name = name;
             this.id = id;
         }
@@ -39,9 +42,11 @@ $(document).ready(function() {
     $("#findByC").click(function() {
         $("#citySearch").toggle();
     });
+
     $("#findByL").click(function() {
         $("#addressSearch").toggle();
     });
+
     $("#cityGoBtn").click(function() {
         url = 'https://developers.zomato.com/api/v2.1/cities?';
         url += "q=" + $('#cityName').val();
@@ -58,6 +63,8 @@ $(document).ready(function() {
         //    console.log(cityID);
             findCuisine();
         })
+        $("#prevBtn").show();
+        $("#nextBtn").show();
 
     });
     $("#nextBtn").click(function(){
@@ -77,6 +84,17 @@ $(document).ready(function() {
         }
     });
     $("#prevBtn").click(function(){
+        if(state == 1){
+            state--;
+            cuisineChoice.length = 0;
+            cuisineID.length = 0;
+            resTypeChoice.length = 0;
+            resTypeID.length = 0;
+
+            $("#prevBtn").hide();
+            $("#nextBtn").hide();
+            $("#screen").html("");
+        }
         if(state == 2){
             state--;
             showCuisine();
