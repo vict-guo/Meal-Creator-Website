@@ -1,4 +1,4 @@
-var url,cityID;
+var url,cityID,lat,lng;
 let cuisineChoice = new Map();
 let cuisineID = new Map();
 let resTypeChoice = new Map();
@@ -6,6 +6,8 @@ let resTypeID = new Map();
 var state = 0;
 var firstInList = true;
 var list = [];
+var maxDis;
+var searchMethod;
 
 $(document).ready(function() {
     //storing restaurant info
@@ -41,13 +43,16 @@ $(document).ready(function() {
 
     $("#findByC").click(function() {
         $("#citySearch").toggle();
+        $("#addressSearch").hide();
     });
 
     $("#findByL").click(function() {
         $("#addressSearch").toggle();
+        $("#citySearch").hide();
     });
 
     $("#cityGoBtn").click(function() {
+        searchMethod = 0;
         url = 'https://developers.zomato.com/api/v2.1/cities?';
         url += "q=" + $('#cityName').val();
         fetch(url, {
@@ -66,6 +71,26 @@ $(document).ready(function() {
         $("#prevBtn").show();
         $("#nextBtn").show();
 
+    });
+    $("#locationGoBtn").click(function(){
+        searchMethod = 1;
+        url = 'http://open.mapquestapi.com/geocoding/v1/address?key=AKo3L6VAtHBF1qt2SjuoB2PpYUYw4zWz&location=';
+        url += $('#addressName').val();
+        maxDis = $('#distanceKM').val()
+        console.log(url);
+        fetch(url).then(function(response){
+            return response.json();
+        }).then(function(val){
+            //console.log(JSON.stringify(val));
+            var loc = JSON.stringify(val);
+
+            lat = JSON.parse(loc).results[0].locations[0].latLng.lat;
+            lng = JSON.parse(loc).results[0].locations[0].latLng.lng;
+
+            findCuisine();
+        })
+        $("#prevBtn").show();
+        $("#nextBtn").show();
     });
     $("#nextBtn").click(function(){
         if(state == 1){
@@ -110,9 +135,17 @@ $(document).ready(function() {
     });
     function findCuisine(){
         url = 'https://developers.zomato.com/api/v2.1/cuisines?';
-        url += 'city_id=';
-        //console.log(cityID);
-        url+= cityID.toString();
+        if(searchMethod){
+            url += 'lat=';
+            url+= lat.toString()+"&";
+            url += 'lon=';
+            url+= lng.toString();
+        }
+        else{
+            url += 'city_id=';
+            url+= cityID.toString();
+        }
+
         fetch(url, {
             headers:{
                 'user-key': '9ad0b763ba1a09e45d3c3eeb9e621a16'
@@ -133,9 +166,16 @@ $(document).ready(function() {
     };
     function findResType(){
         url = 'https://developers.zomato.com/api/v2.1/establishments?';
-        url += 'city_id=';
-        //console.log(cityID);
-        url+= cityID.toString();
+        if(searchMethod){
+            url += 'lat=';
+            url+= lat.toString()+"&";
+            url += 'lon=';
+            url+= lng.toString();
+        }
+        else{
+            url += 'city_id=';
+            url+= cityID.toString();
+        }
         fetch(url, {
             headers:{
                 'user-key': '9ad0b763ba1a09e45d3c3eeb9e621a16'
@@ -156,9 +196,21 @@ $(document).ready(function() {
     }
     function findRestaurant(){
         url = 'https://developers.zomato.com/api/v2.1/search?';
-        url+= 'entity_id=';
-        url+= cityID.toString();
-        url+= '&entity_type=city&cuisines=';
+        if(searchMethod){
+            maxDis = parseInt(maxDis)*1000;
+            url += 'lat=';
+            url+= lat.toString()+"&";
+            url += 'lon=';
+            url+= lng.toString()+"&";
+            url+= 'radius=';
+            url+= maxDis.toString()+"&";
+        }
+        else{
+            url+= 'entity_id=';
+            url+= cityID.toString();
+            url+= '&entity_type=city&';
+        }
+        url+="cuisines=";
         firstInList = true;
         for (let [a, b] of cuisineChoice) {
             if(b && firstInList){
@@ -183,7 +235,7 @@ $(document).ready(function() {
             }
         }
         url+='&sort=rating&order=desc';
-
+        console.log(url);
         fetch(url, {
             headers:{
                 'user-key': '9ad0b763ba1a09e45d3c3eeb9e621a16'
