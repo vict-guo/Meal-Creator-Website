@@ -13,6 +13,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout'%}">Sign Out</a></li>
+                {% else %}
+                <li><a href="{% url 'login'%}">Log In</a></li>
+                {% endif %}
                 <li><a href="{% url 'Home'%}">Home</a></li>
                 <li><a href="{% url 'Contact Us'%}">Contact</a></li>
                 <li><a href="{% url 'About'%}">About</a></li>

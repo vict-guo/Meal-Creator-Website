@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '2-j^8c3=_-&-azbt)lsp*u&4z0)((7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['mealcreator.herokuapp.com']
+ALLOWED_HOSTS = ['mealcreator.herokuapp.com','127.0.0.1']
 
 # Application definition
 
@@ -131,3 +131,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
