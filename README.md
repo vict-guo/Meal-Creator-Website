@@ -1,4 +1,4 @@
-# Meal-Creator-Website
+# Restaurant Finder
 
 A website to help you find restaurants and discover new things to eat.
 
