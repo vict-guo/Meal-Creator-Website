@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'pages',
     'accounts.apps.AccountsConfig',
 ]
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL HOST
+#EMAIL_HOST = 'smtp.sendgrid.net'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'vguo'
+#EMAIL_HOST_PASSWORD = 'victor123'
+#EMAIL_USE_TLS = True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
