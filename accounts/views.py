@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 class SignUpForm(UserCreationForm):
@@ -30,15 +32,19 @@ def SignUp(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
+            subject = 'Activate Your Meal Creator Account'
             message = render_to_string('account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token':tokens.account_activation_token.make_token(user),
             })
-            user.email_user(subject, message)
+            #user.email_user(subject, message)
+            from_email = settings.DEFAULT_FROM_EMAIL
+            send_mail(subject, message, from_email, [user.email], fail_silently=False)
+
             return redirect('account_activation_sent')
+
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})

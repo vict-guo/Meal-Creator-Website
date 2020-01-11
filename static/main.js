@@ -310,11 +310,14 @@ $(document).ready(function() {
         str+='<div class="col-md-4"><div class="card mb-4 shadow-sm"><img class="bd-placeholder-img card-img-top" width="100%" height="225" src=\"'+RES_NAME.thumbnail +'\" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></img>';
         str+='<div class="card-body"><p class="card-text">';
         str+=RES_NAME.name;
-        str+='</p><div class="d-flex justify-content-between align-items-center" ><div class="btn-group"><button type="button" class="btn btn btn-outline-secondary" onclick = \'queryRestaurant(this);\' id = \''+idx+'\' >View</button></div><div class="form-check"><input class="form-check-input" type="checkbox" value="" onchange=\'handleRestaurant(this);\'id = \''+idx+'\'';
+        str+='</p><div class="d-flex justify-content-between align-items-center" ><div class="btn-group"><button type="button" class="btn btn btn-outline-secondary" onclick = \'FavRestaurant(this);\' id = \''+idx+'\' >Favorite</button></div><div class="form-check"><input class="form-check-input" type="checkbox" value="" onchange=\'handleRestaurant(this);\'id = \''+idx+'\'';
         if(bool)
             str+='checked';
         str+='></div>';
         str+= '<small class="text-muted">Restaurant</div></div></div>';
         $("#screen").append(str);
+    }
+    function FavRestaurant(){
+        
     }
 });

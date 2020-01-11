@@ -42,13 +42,20 @@ INSTALLED_APPS = [
     'pages',
     'accounts.apps.AccountsConfig',
 ]
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 #EMAIL HOST
-#EMAIL_HOST = 'smtp.sendgrid.net'
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'vguo'
-#EMAIL_HOST_PASSWORD = 'victor123'
-#EMAIL_USE_TLS = True
+#SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+#SENDGRID_API_KEY = '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'
+#SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'restaurantmealfinder@gmail.com'
+EMAIL_HOST_PASSWORD = 'creator8!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+#EMAIL_USE_SSL = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'm4victor@gmail.com'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
